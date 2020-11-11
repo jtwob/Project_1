@@ -4,7 +4,7 @@ weary COVID-19 survivors fantasize about all the places they would go if not stu
 
 ## Tech
 * Uses the REST Countries v1 api
-* Uses the ~Find an api~ api
+* Uses the openweathermap api
 
 ## UPDATE
 Testing
