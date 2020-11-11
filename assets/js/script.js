@@ -1,6 +1,15 @@
 let searchLocation = "";
+let capital = "";
+let toggle = 0;
 
+$("#main").toggle();
 
+let toggleMain = function () {
+    if (toggle === 0) {
+        $("#main").toggle();
+        toggle++;
+    }
+}
 /**
  * FIX: This event listener is broken, be sure it has access to the correct data
  */
@@ -12,8 +21,9 @@ $("form").on("submit", function (e) {
     // item.text(input)
     // $("#citySearchHistory").prepend(item)
     searchLocation = input;
+    toggleMain();
+    bannerFetch();
 
-    webpageGenerator();
 })
 
 /**
@@ -29,12 +39,16 @@ let bannerFetch = function () {
             $("#country-name").text(data[0].name) //country name
             $("#capital").text("Capital: " + data[0].capital)
             $("#callCode").text("Calling Code: " + data[0].callingCodes[0])
-            $("#timeZone").text("Time Zone: " + data[0].timezones[0] + ", " +data[0].timezones[1] + ", " + data[0].timezones[2])
+            $("#timeZone").text("Time Zone: " + data[0].timezones[0] + ", " + data[0].timezones[1] + ", " + data[0].timezones[2])
             $("#currency").text("Currency: " + data[0].currencies[0].name)
             $("#lang").text("Language: " + data[0].languages[0].name)
             $("#pop").text("Population: " + data[0].population)
             $("#nat-flag").attr("src", data[0].flag);
             $("#nat-flag").attr("style", "width: 300px;");
+            $("#capital-city").text(data[0].capital);
+
+            capital = data[0].capital.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+            weatherFetch();
         })
 }
 
@@ -42,7 +56,9 @@ let bannerFetch = function () {
  * Fetch weather data and return it
  */
 let weatherFetch = function () {
-    fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${searchLocation}&units=imperial&appid=b8cf73639b0d81c1905ba1ac1cb6f289`)
+    // console.log($("#capital-city").text());s
+    // capital = $("#capital-city").val();
+    fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${capital}&units=imperial&appid=b8cf73639b0d81c1905ba1ac1cb6f289`)
         .then(response => response.json())
         .then(data => {
             weatherCards(data);
@@ -54,7 +70,7 @@ let weatherFetch = function () {
  */
 let weatherCards = function (weatherData) {
     $("#weather-cards").empty();
-    console.log(weatherData);
+    // console.log(weatherData);
     for (let i = 0; i < weatherData.list.length; i += 8) {
         cardBuilder(weatherData.list[i]);
     }
@@ -89,25 +105,7 @@ let cardBuilder = function (data) {
 
 }
 
-
-
 let webpageGenerator = function () {
     bannerFetch();
     weatherFetch();
 }
-
-
-
-// fetch("https://api.openweathermap.org/data/2.5/forecast?q=Dallas&appid=b8cf73639b0d81c1905ba1ac1cb6f289")
-//     .then(response => response.json())
-//     .then(data => console.log(data));
-
-// fetch("https://restcountries.eu/rest/v2/name/usa")
-//     .then(response => response.json())
-//     .then(data => {
-//         $("#country-name").text(data[0].name);
-//         $("#country-name").attr("style", "text-align: center;");
-//         $("#nat-flag").attr("src", data[0].flag);
-//         $("#nat-flag").attr("style", "width: 300px;");
-//         $("#country-data").attr("style", "width: fit-content;");
-//     });
