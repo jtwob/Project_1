@@ -1,18 +1,18 @@
-let searchLocation = document.getElementById("search");
+let searchLocation = "";
 
 /**
  * FIX: This event listener is broken, be sure it has access to the correct data
  */
-$("#search").on("submit", function (e) {
+$("form").on("submit", function (e) {
     e.preventDefault();
-    let input = $("#searchLocation").val();
-    let item = $("<li>")
-    item.text(input)
-    $("#citySearchHistory").prepend(item)
-    console.log(e.target.value);
-    searchLocation = e.target.value;
 
-    webpageGenerator(input);
+    let input = $("#search-bar").val();
+    // let item = $("<li>")
+    // item.text(input)
+    // $("#citySearchHistory").prepend(item)
+    searchLocation = input;
+
+    webpageGenerator();
 })
 
 /**
@@ -83,12 +83,9 @@ let cardBuilder = function (data) {
 
 let webpageGenerator = function () {
     bannerFetch();
-    let weatherData = weatherFetch();
-    weatherCards(weatherData);
+    weatherFetch();
 }
 
-
-weatherFetch();
 
 
 // fetch("https://api.openweathermap.org/data/2.5/forecast?q=Dallas&appid=b8cf73639b0d81c1905ba1ac1cb6f289")
@@ -104,4 +101,3 @@ weatherFetch();
 //         $("#nat-flag").attr("style", "width: 300px;");
 //         $("#country-data").attr("style", "width: fit-content;");
 //     });
-console.log(allDat)
