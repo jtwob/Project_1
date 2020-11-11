@@ -1,14 +1,18 @@
-let searchLocation = "mexico";
-
+let searchLocation = document.getElementById("search");
 
 /**
  * FIX: This event listener is broken, be sure it has access to the correct data
  */
 $("#search").on("submit", function (e) {
     e.preventDefault();
+    let input = $("#searchLocation").val();
+    let item = $("<li>")
+    item.text(input)
+    $("#citySearchHistory").prepend(item)
     console.log(e.target.value);
     searchLocation = e.target.value;
-    webpageGenerator();
+
+    webpageGenerator(input);
 })
 
 /**
@@ -100,3 +104,4 @@ weatherFetch();
 //         $("#nat-flag").attr("style", "width: 300px;");
 //         $("#country-data").attr("style", "width: fit-content;");
 //     });
+console.log(allDat)
