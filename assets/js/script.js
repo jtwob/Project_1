@@ -1,4 +1,4 @@
-
+let searchLocation = "";
 
 
 /**
@@ -7,6 +7,7 @@
 $("#search").on("submit", function (e) {
     e.preventDefault();
     console.log(e.target.value);
+    searchLocation = e.target.value;
     webpageGenerator();
 })
 
@@ -14,9 +15,11 @@ $("#search").on("submit", function (e) {
  * Fetch and fill country card
  */
 let bannerFetch = function () {
-    fetch("URL")
+    let url = `https://restcountries.eu/rest/v2/name/${searchLocation}`
+    fetch(url)
         .then(response => response.json())
         .then(data => {
+            console.log(data)
             //FILL CODE
         })
 }
@@ -39,10 +42,13 @@ let weatherCards = function (weatherData) {
     //Clear existing cards before adding more
 
 
-    for (let i = 0; i < weatherData.list.length; i++) {
+    for (let i = 0; i < weatherData.list.length; i += 8) {
         //create and fill card elems here or write another function to call here accessing the weatherData parameter
+
     }
 }
+
+
 
 let webpageGenerator = function () {
     bannerFetch();
