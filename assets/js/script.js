@@ -1,5 +1,6 @@
 let searchLocation = document.getElementById("search");
 
+
 /**
  * FIX: This event listener is broken, be sure it has access to the correct data
  */
@@ -16,15 +17,24 @@ $("#search").on("submit", function (e) {
 })
 
 /**
- * Fetch and fill country card
+ * Fetch and fill country card by Nimarti
  */
 let bannerFetch = function () {
     let url = `https://restcountries.eu/rest/v2/name/${searchLocation}`
     fetch(url)
         .then(response => response.json())
         .then(data => {
-            console.log(data)
+            // console.log(data)
             //FILL CODE
+            $("#country-name").text(data[0].name) //country name
+            $("#capital").text("Capital: " + data[0].capital)
+            $("#callCode").text("Calling Code: " + data[0].callingCodes[0])
+            $("#timeZone").text("Time Zone: " + data[0].timezones[0] + ", " +data[0].timezones[1] + ", " + data[0].timezones[2])
+            $("#currency").text("Currency: " + data[0].currencies[0].name)
+            $("#lang").text("Language: " + data[0].languages[0].name)
+            $("#pop").text("Population: " + data[0].population)
+            $("#nat-flag").attr("src", data[0].flag);
+            $("#nat-flag").attr("style", "width: 300px;");
         })
 }
 
