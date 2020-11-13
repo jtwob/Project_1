@@ -43,7 +43,6 @@ let bannerFetch = function () {
                 $("#main").empty();
                 $("#main").append(err404);
                 $("#main").append(link);
-
             }
             return response.json();
         })
@@ -150,4 +149,3 @@ let mapGen = function () {
     });
 }
 
-console.log("i Am HERE");
