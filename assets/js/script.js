@@ -37,7 +37,6 @@ let bannerFetch = function () {
                 let err404 = $("<h1>");
                 let link = $("<a>");
                 link.attr("href", "https://jtwob.github.io/Travel_Almanac/");
-                // link.attr("target", "_blank");
                 link.text("Click here to go back");
                 err404.text("404: Country not in database.");
                 err404.attr("style", "color: white;");
@@ -49,8 +48,6 @@ let bannerFetch = function () {
             return response.json();
         })
         .then(data => {
-            // console.log(data)
-            //FILL CODE
             let timezonesStr = "Timezone(s): ";
             $("#country-name").empty();
             iconGen();
@@ -86,8 +83,6 @@ let bannerFetch = function () {
  * Fetch weather data and return it
  */
 let weatherFetch = function () {
-    // console.log($("#capital-city").text());s
-    // capital = $("#capital-city").val();
     fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${capital}&units=imperial&appid=b8cf73639b0d81c1905ba1ac1cb6f289`)
         .then(response => response.json())
         .then(data => {
@@ -100,7 +95,6 @@ let weatherFetch = function () {
  */
 let weatherCards = function (weatherData) {
     $("#weather-cards").empty();
-    // console.log(weatherData);
     for (let i = 0; i < weatherData.list.length; i += 8) {
         cardBuilder(weatherData.list[i]);
     }
