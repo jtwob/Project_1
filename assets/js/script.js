@@ -4,8 +4,9 @@ let toggle = 0;
 
 $("#main").toggle();
 
-let toggleMain = function () {
+let toggleOnce = function () {
     if (toggle === 0) {
+        $("#instructions").toggle();
         $("#main").toggle();
         toggle++;
     }
@@ -21,7 +22,7 @@ $("form").on("submit", function (e) {
     // item.text(input)
     // $("#citySearchHistory").prepend(item)
     searchLocation = input;
-    toggleMain();
+    toggleOnce();
     bannerFetch();
 
 })
