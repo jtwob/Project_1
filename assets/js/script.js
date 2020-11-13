@@ -122,7 +122,7 @@ let cardBuilder = function (data) {
     cardTitle.attr("class", "card-title");
     cardTitle.text(moment(data.dt_txt).format("L"));
     icon.attr("src", "https://openweathermap.org/img/w/" + data.weather[0].icon + ".png");
-    temp.text("Temperature: " + data.main.temp + " °F");
+    temp.text("Temp: " + data.main.temp + " °F");
     humidity.text("Humidity: " + data.main.humidity + "%")
 
     content.append(cardTitle);
