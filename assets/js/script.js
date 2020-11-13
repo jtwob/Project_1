@@ -20,9 +20,6 @@ $("form").on("submit", function (e) {
     e.preventDefault();
 
     let input = $("#search-bar").val();
-    // let item = $("<li>")
-    // item.text(input)
-    // $("#citySearchHistory").prepend(item)
     searchLocation = input;
     toggleOnce();
     bannerFetch();
@@ -35,7 +32,22 @@ $("form").on("submit", function (e) {
 let bannerFetch = function () {
     let url = `https://restcountries.eu/rest/v2/name/${searchLocation}`
     fetch(url)
-        .then(response => response.json())
+        .then(response => {
+            if (response.status === 404) {
+                let err404 = $("<h1>");
+                let link = $("<a>");
+                link.attr("href", "https://jtwob.github.io/Travel_Almanac/");
+                // link.attr("target", "_blank");
+                link.text("Click here to go back");
+                err404.text("404: Country not in database.");
+                err404.attr("style", "color: white;");
+                $("#main").empty();
+                $("#main").append(err404);
+                $("#main").append(link);
+
+            }
+            return response.json();
+        })
         .then(data => {
             // console.log(data)
             //FILL CODE
