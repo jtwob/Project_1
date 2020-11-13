@@ -7,12 +7,14 @@
     <link rel="stylesheet" href="./assets/style/style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.4.3/css/ol.css" type="text/css">
     <title>Travel Almanac</title>
 </head>
 
 <body>
     <nav>
-        <div class="nav-wrapper">
+        <div class="nav-wrapper teal">
             <form id="search">
                 <div class="input-field">
                     <input type="search" id="search-bar" required>
@@ -25,30 +27,30 @@
 
     <div class="container" id="instructions">
         <div class="row">
-            <div class="col s0 m3"></div>
-            <div class="col s12 m6">
+            <div class="col s12 m6 offset-m3">
                 <div class="card-panel teal">
                     <h4 class="white-text">Instructions:</h4>
                     <span class="white-text">
                         <!-- Fill in instructions -->
-                        Welcome to the Travel Almanac. Here you can search any country and learn its capital city, native language, currency, and more. We will also provide you with a 5 day weather forecast so that you may pack accordingly. To begin simply type the country of your liking into the search bar and go. 
+                        Welcome to the Travel Almanac. Here you can search any country and learn its capital city,
+                        native language, currency, and more. We will also provide you with a 5 day weather forecast so
+                        that you may pack accordingly. To begin simply type the country of your liking into the search
+                        bar and go.
                     </span>
                 </div>
             </div>
-            <div class="col s0 m3"></div>
         </div>
     </div>
 
 
     <div class="container" id="main">
         <div class="row">
-            <div class="card col sm4">
+            <div class="card col push-sm4" style="margin-top: 20px; padding-top: 5px;">
                 <div class="card-image waves-effect waves-block waves-light">
-                    <img class="activator" id="nat-flag" src="https://via.placeholder.com/300x200">
+                    <img class="activator" id="nat-flag" src="">
                 </div>
                 <div class="card-content">
-                    <span class="card-title activator grey-text text-darken-4" id="country-name"><i
-                            class="material-icons right">more_vert</i></span>
+                    <span class="card-title activator grey-text text-darken-4" id="country-name"></span>
                 </div>
                 <div class="card-reveal">
                     <span class="card-title grey-text text-darken-4" id="country-name-inner"><i
@@ -62,15 +64,20 @@
                 </div>
             </div>
 
-            <div class="col sm8" style="margin-left: 10px;">
-                <h5 id="capital-city"></h5>
+            <div class="col pull-sm8">
+                <div id="map" class="map"></div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col sm8" style="margin-left: 10px; margin-top: -30px;">
+                <h5 id="capital-city" class="white-text"></h5>
                 <div class="row" id="weather-cards"></div>
             </div>
-
         </div>
 
     </div>
 
+    <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.4.3/build/ol.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"
         integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg=="
         crossorigin="anonymous"></script>
