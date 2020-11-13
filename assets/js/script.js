@@ -1,5 +1,7 @@
 let searchLocation = "";
 let capital = "";
+let lat = 0;
+let lng = 0;
 let toggle = 0;
 
 $("#main").toggle();
@@ -38,14 +40,14 @@ let bannerFetch = function () {
             // console.log(data)
             //FILL CODE
             let timezonesStr = "Timezone(s): ";
-
-            $("#country-name").text(data[0].name) //country name
-            $("#capital").text("Capital: " + data[0].capital)
-            $("#callCode").text("Calling Code: " + data[0].callingCodes[0])
-            // $("#timeZone").text("Time Zone: " + data[0].timezones[0] + ", " + data[0].timezones[1] + ", " + data[0].timezones[2])
-            $("#currency").text("Currency: " + data[0].currencies[0].name)
-            $("#lang").text("Language: " + data[0].languages[0].name)
-            $("#pop").text("Population: " + data[0].population)
+            $("#country-name").empty();
+            iconGen();
+            $("#country-name").prepend(data[0].name);
+            $("#capital").text("Capital: " + data[0].capital);
+            $("#callCode").text("Calling Code: " + data[0].callingCodes[0]);
+            $("#currency").text("Currency: " + data[0].currencies[0].name);
+            $("#lang").text("Language: " + data[0].languages[0].name);
+            $("#pop").text("Population: " + data[0].population);
             $("#nat-flag").attr("src", data[0].flag);
             $("#nat-flag").attr("style", "width: 300px;");
             $("#capital-city").text(data[0].capital);
@@ -57,9 +59,14 @@ let bannerFetch = function () {
                 }
             }
 
+            lat = data[0].latlng[0];
+            lng = data[0].latlng[1];
+
             $("#timeZone").text(timezonesStr);
             capital = data[0].capital.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
             weatherFetch();
+            $("#map").empty();
+            mapGen();
         })
 }
 
@@ -113,10 +120,27 @@ let cardBuilder = function (data) {
     card.append(content);
     cardCol.append(card);
     $("#weather-cards").append(cardCol);
-
 }
 
-let webpageGenerator = function () {
-    bannerFetch();
-    weatherFetch();
+let iconGen = function () {
+    let icon = $("<i>");
+    icon.attr("class", "material-icons right");
+    icon.text("more_vert");
+    $("#country-name").append(icon);
 }
+
+let mapGen = function () {
+    var map = new ol.Map({
+        target: 'map',
+        layers: [
+            new ol.layer.Tile({
+                source: new ol.source.OSM()
+            })
+        ],
+        view: new ol.View({
+            center: ol.proj.fromLonLat([lng, lat]),
+            zoom: 4
+        })
+    });
+}
+
