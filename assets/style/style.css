@@ -4,6 +4,10 @@
     background-repeat: no-repeat;
   }
   
+  #instructions {
+    margin-top: 80px;
+  }
+  
   #map {
     margin-top: 20px;
     margin-left: 25px;
