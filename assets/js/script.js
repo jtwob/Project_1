@@ -39,7 +39,7 @@ let bannerFetch = function () {
             //FILL CODE'
             let timezonesStr = "Timezone(s): "
             
-            $("#country-name").text(data[0].name) //country name
+            $("#country-name").text(data[0].name) 
             $("#capital").text("Capital: " + data[0].capital)
             $("#callCode").text("Calling Code: " + data[0].callingCodes[0])
             $("#currency").text("Currency: " + data[0].currencies[0].name)
