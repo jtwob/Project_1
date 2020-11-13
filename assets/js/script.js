@@ -36,18 +36,26 @@ let bannerFetch = function () {
         .then(response => response.json())
         .then(data => {
             // console.log(data)
-            //FILL CODE
-            $("#country-name").text(data[0].name) //country name
+            //FILL CODE'
+            let timezonesStr = "Timezone(s): "
+            
+            $("#country-name").text(data[0].name) 
             $("#capital").text("Capital: " + data[0].capital)
             $("#callCode").text("Calling Code: " + data[0].callingCodes[0])
-            $("#timeZone").text("Time Zone: " + data[0].timezones[0] + ", " + data[0].timezones[1] + ", " + data[0].timezones[2])
             $("#currency").text("Currency: " + data[0].currencies[0].name)
             $("#lang").text("Language: " + data[0].languages[0].name)
             $("#pop").text("Population: " + data[0].population)
             $("#nat-flag").attr("src", data[0].flag);
             $("#nat-flag").attr("style", "width: 300px;");
             $("#capital-city").text(data[0].capital);
-
+            
+            for (let i = 0; i < data[0].timezones.length; i++){
+                timezonesStr += data[0].timezones[i];
+                if (i +1 !== data[0].timezonenes.length){
+                    timezonesStr += ", ";
+                }
+            }
+            $("#timeZone").text(timezonesStr)
             capital = data[0].capital.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
             weatherFetch();
         })
