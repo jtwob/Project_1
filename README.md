@@ -9,5 +9,5 @@ weary COVID-19 survivors fantasize about all the places they would go if not stu
 ## Functionality Example:
 ![Photo](./assets/images/functionality.gif)
 
-## UPDATE
-Testing
+### Live Website
+[Click Here to Navigate](https://jtwob.github.io/Travel_Almanac/)
