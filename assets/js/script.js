@@ -71,10 +71,11 @@ let bannerFetch = function () {
                 }
             }
 
+            $("#timeZone").text(timezonesStr);
+
             lat = data[0].latlng[0];
             lng = data[0].latlng[1];
 
-            $("#timeZone").text(timezonesStr);
             capital = data[0].capital.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
             weatherFetch();
             $("#map").empty();
