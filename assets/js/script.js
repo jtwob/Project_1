@@ -108,7 +108,7 @@ let weatherCards = function (weatherData) {
 
 /**
  * cardBuilder is a helper function that does the heavy lifting for weatherCards. Using jquery to create and fill card elements, and appending them to the index.
- * @param {*} data individual day datapoints from openweathermap api fetch request
+ * @param {Object} data individual day datapoints from openweathermap api fetch request
  */
 let cardBuilder = function (data) {
     let cardCol = $("<div>");
