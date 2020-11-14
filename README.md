@@ -5,6 +5,7 @@ weary COVID-19 survivors fantasize about all the places they would go if not stu
 ## Tech
 * Uses the REST Countries v1 api
 * Uses the openweathermap api
+* Uses the openlayers api
 
 ## Functionality Example:
 ![Photo](./assets/images/functionality.gif)
