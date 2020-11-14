@@ -6,6 +6,9 @@ let toggle = 0;
 
 $("#main").toggle();
 
+/**
+ * toggleOnce is a helper function that ensures the page loads correctly on refresh.
+ */
 let toggleOnce = function () {
     if (toggle === 0) {
         $("#instructions").toggle();
@@ -14,7 +17,7 @@ let toggleOnce = function () {
     }
 }
 /**
- * FIX: This event listener is broken, be sure it has access to the correct data
+ * This is an event listener that picks up user query and calls fetch functions
  */
 $("form").on("submit", function (e) {
     e.preventDefault();
@@ -27,7 +30,8 @@ $("form").on("submit", function (e) {
 })
 
 /**
- * Fetch and fill country card by Nimarti
+ * bannerFetch is a function that requests broad country data about the user query and fills in the relevent elements in the index file. 
+ * Handles a 404 response with a message and a link back to the app.
  */
 let bannerFetch = function () {
     let url = `https://restcountries.eu/rest/v2/name/${searchLocation}`
@@ -79,7 +83,7 @@ let bannerFetch = function () {
 }
 
 /**
- * Fetch weather data and return it
+ * weatherFetch fetches the weather for the capital city of the query country and calls weatherCards, a helper function to create the forecast cards.
  */
 let weatherFetch = function () {
     fetch(`https://api.openweathermap.org/data/2.5/forecast?q=${capital}&units=imperial&appid=b8cf73639b0d81c1905ba1ac1cb6f289`)
@@ -90,7 +94,8 @@ let weatherFetch = function () {
 }
 
 /**
- * Write a loop that fills appropriate number of cards with relevent weather data
+ * weatherCards is a simple for loop that iterates over the weather data and builds a card using the cardBuilder function and the data for the relevent day.
+ * @param {Object} weatherData is the data returned from the openweathermap api fetch request
  */
 let weatherCards = function (weatherData) {
     $("#weather-cards").empty();
@@ -99,6 +104,11 @@ let weatherCards = function (weatherData) {
     }
 }
 
+
+/**
+ * cardBuilder is a helper function that does the heavy lifting for weatherCards. Using jquery to create and fill card elements, and appending them to the index.
+ * @param {*} data individual day datapoints from openweathermap api fetch request
+ */
 let cardBuilder = function (data) {
     let cardCol = $("<div>");
     let card = $("<div>");
@@ -127,6 +137,9 @@ let cardBuilder = function (data) {
     $("#weather-cards").append(cardCol);
 }
 
+/**
+ * iconGen is a small helper function that adds a triple dot icon after the country name to indicate there is more data on click.
+ */
 let iconGen = function () {
     let icon = $("<i>");
     icon.attr("class", "material-icons right");
@@ -134,6 +147,9 @@ let iconGen = function () {
     $("#country-name").append(icon);
 }
 
+/**
+ * mapGen is a function pulled directly from the openlayers api documentation. It uses syntax derived from the openlayers library.
+ */
 let mapGen = function () {
     var map = new ol.Map({
         target: 'map',
@@ -148,4 +164,3 @@ let mapGen = function () {
         })
     });
 }
-

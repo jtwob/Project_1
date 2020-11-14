@@ -4,10 +4,12 @@
     background-repeat: no-repeat;
   }
   
+  /* Pushing the instruction panel down from the top of the page */
   #instructions {
     margin-top: 80px;
   }
   
+  /* Giving the map margins, and width/height */
   #map {
     margin-top: 20px;
     margin-left: 25px;
@@ -15,6 +17,7 @@
     height: 350px;
   }
 
+  /* Making sure the flag image does not blend into the white card background if there is white on the flag */
   #nat-flag{
       border-style: solid;
       border-color: black;
